@@ -176,7 +176,7 @@ public class CasinoWar {
 
         while (p1.cardsLeft() != 0 && p2.cardsLeft() != 0) {
             
-            System.out.println("Press ENTER to play next round...");
+            System.out.println("\nPress ENTER to play next round...");
             input.nextLine();  // waits for user input
 
             // play cards
@@ -184,8 +184,9 @@ public class CasinoWar {
             p2Card = p2.playCard();
             
             System.out.println("Cards played: ");
-            
+            System.out.println("Player 1: ");
             p1Card.printCard();
+            System.out.println("Player 2: ");
             p2Card.printCard();
             
             if (p1Card.getValue() > p2Card.getValue()) { // if player 1 has the higher card
@@ -224,7 +225,9 @@ public class CasinoWar {
                 
                     // each player puts 1 face down card
                     warPile[warCount++] = p1.playCard();
+                    System.out.println("Player 1 played a face down card");
                     warPile[warCount++] = p2.playCard();
+                    System.out.println("Player 2 played a face down card");
                 
                     // each player plays one face-up card
                     Card newP1Card = p1.playCard();
@@ -234,7 +237,9 @@ public class CasinoWar {
                     warPile[warCount++] = newP2Card;
                 
                     System.out.println("WAR cards played:");
+                    System.out.println("Player 1: ");
                     newP1Card.printCard();
+                    System.out.println("Player 2: ");
                     newP2Card.printCard();
                 
                     // compare
