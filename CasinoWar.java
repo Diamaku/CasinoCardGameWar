@@ -3,10 +3,7 @@ package War;
 // Casino War Card Game
 
 // imports
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import java.io.*;
+import java.util.Scanner;
 
 // card class to represent a single playing card
 class Card {
@@ -111,6 +108,14 @@ class Deck {
             cards[j] = temp;
         }
     }
+
+    // show deck method
+    void showDeck() {
+        System.out.println("Showing deck");
+        for (int i = 0; i < cards.length; i++) {
+            cards[i].printCard();
+        }
+    }
 }
 
 class Player {
@@ -146,13 +151,14 @@ class Player {
     }
 }
 
-public class CasinoWar implements ActionListener {
-
-    CasinoWar () {
+public class CasinoWar {
+    // main method for output
+    public static void main(String args[]) {
         // declare deck, player 1, and player 2
         Deck deck = new Deck();
         Player p1 = new Player("Player 1");
         Player p2 = new Player("Player 2");
+        Scanner input = new Scanner(System.in);
 
         // declare what player 1 and player 2 cards are
         Card p1Card, p2Card;
@@ -161,15 +167,18 @@ public class CasinoWar implements ActionListener {
         deck.shuffle();
 
         // add half the deck to player 1
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 26; i++)
             p1.addCard(deck.cards[i]);
 
         // add the other half of the deck to player 2
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 26; i++)
             p2.addCard(deck.cards[i+26]);
 
         while (p1.cardsLeft() != 0 && p2.cardsLeft() != 0) {
             
+            System.out.println("Press ENTER to play next round...");
+            input.nextLine();  // waits for user input
+
             // play cards
             p1Card = p1.playCard();
             p2Card = p2.playCard();
@@ -202,8 +211,14 @@ public class CasinoWar implements ActionListener {
             
                 while (!warResolved) {
                     // check if players have enough cards
-                    if (p1.cardsLeft() < 2 || p2.cardsLeft() < 2) {
-                        System.out.println("A player ran out of cards during WAR!");
+                    if (p1.cardsLeft() < 2) {
+                        System.out.println("Player 1 ran out of cards during WAR");
+                        System.out.println("Player 2 wins the game!");
+                        return;
+                    }
+                    else if (p2.cardsLeft() < 2) {
+                        System.out.println("Player 2 ran out of cards during WAR");
+                        System.out.println("Player 1 wins the game!");
                         return;
                     }
                 
@@ -246,37 +261,13 @@ public class CasinoWar implements ActionListener {
             }
             System.out.println("Player 1 cards left: " + p1.cardsLeft());
             System.out.println("Player 2 cards left: " + p2.cardsLeft());
-        }
 
-/*
-        // Create a new JFrame container.
-        JFrame jfrm = new JFrame("War");
-
-        // Specify FlowLayour for the layout manager.
-        jfrm.setLayout(new FlowLayout());
-
-        // Give the frame an initial size.
-        jfrm.setSize(500, 350);
-        // Terminate the program when the user closes the application.
-        jfrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Display the frame.
-        jfrm.setVisible(true);
-        */
-    }
-
-    public void actionPerformed(ActionEvent ae) {
-        
-    }
-
-    // main method for output
-    public static void main(String args[]) {
-
-        // Create the frame on the event dispatching thread.
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new CasinoWar();
+            if (p1.cardsLeft() == 0) {
+                System.out.println("Player 2 wins the game!");
             }
-        });
+            else if (p2.cardsLeft() == 0) {
+                System.out.println("Player 1 wins the game!");
+            }
+        }
     }
 }
