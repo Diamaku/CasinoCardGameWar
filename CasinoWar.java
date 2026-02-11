@@ -105,6 +105,9 @@ public class CasinoWar {
                         System.out.println(p1.name + " wins the game!");
                         return;
                     }
+
+                    System.out.println("\nPress ENTER to play face down card...");
+                    input.nextLine();
                 
                     // each player puts 1 face down card
                     warPile[warCount++] = p1.playCard();
@@ -112,6 +115,9 @@ public class CasinoWar {
                     warPile[warCount++] = p2.playCard();
                     System.out.println(p2.name + " played a face down card");
                 
+                    System.out.println("\nPress ENTER to play face up card...");
+                    input.nextLine();
+
                     // each player plays one face-up card
                     Card newP1Card = p1.playCard();
                     Card newP2Card = p2.playCard();
@@ -145,6 +151,8 @@ public class CasinoWar {
                     else { // both cards are equal WAR continues
                         System.out.println("WAR continues");
                     }
+                    
+                    System.out.println("War pile: " + warCount);
                 }
             }
             System.out.println(p1.name + " cards left: " + p1.cardsLeft());
