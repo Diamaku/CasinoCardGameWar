@@ -57,6 +57,7 @@ public class CasinoWar {
 */
         System.out.println("\nReady to play!");
 
+        // runs game while players still have cards
         while (p1.cardsLeft() != 0 && p2.cardsLeft() != 0) {
             
             System.out.println("\nPress ENTER to play next round...");
@@ -87,7 +88,7 @@ public class CasinoWar {
                 Card warPile[] = new Card[52];
                 int warCount = 0;
             
-                // add the tied cards
+                // add the tied cards to pile
                 warPile[warCount++] = p1Card;
                 warPile[warCount++] = p2Card;
             
@@ -109,7 +110,7 @@ public class CasinoWar {
                     System.out.println("\nPress ENTER to play face down card...");
                     input.nextLine();
                 
-                    // each player puts 1 face down card
+                    // each player puts one face-down card
                     warPile[warCount++] = p1.playCard();
                     System.out.println(p1.name + " played a face down card");
                     warPile[warCount++] = p2.playCard();
@@ -125,6 +126,7 @@ public class CasinoWar {
                     warPile[warCount++] = newP1Card;
                     warPile[warCount++] = newP2Card;
                 
+                    // shows what card each player played
                     System.out.println("WAR cards played:");
                     System.out.println(p1.name + ": ");
                     newP1Card.printCard();
@@ -155,9 +157,12 @@ public class CasinoWar {
                     System.out.println("War pile: " + warCount);
                 }
             }
+
+            // shows how many cards each player has left
             System.out.println(p1.name + " cards left: " + p1.cardsLeft());
             System.out.println(p2.name + " cards left: " + p2.cardsLeft());
 
+            // who wins
             if (p1.cardsLeft() == 0) {
                 System.out.println(p2.name + " wins the game!");
             }
